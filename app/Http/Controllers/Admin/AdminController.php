@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-//use App\Traits\UploadFiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
 
+
 class AdminController extends Controller
 {
-//    use UploadFiles;
     public function index(request $request)
     {
         if ($request->ajax()) {
@@ -55,8 +54,9 @@ class AdminController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        if($request->has('image'))
-            $data['image'] = $this->saveFile($request->image,'assets/uploads/admins','yes','50');;
+        if($request->has('image')){
+            //
+        }
 
 
         $data['password'] = Hash::make($request->password);
@@ -64,7 +64,7 @@ class AdminController extends Controller
         Admin::create($data);
         return response()->json(
             [
-                'code' => 200,
+                'status'  => 200,
                 'message' => "Data Added Successfully"
             ]);
     }
