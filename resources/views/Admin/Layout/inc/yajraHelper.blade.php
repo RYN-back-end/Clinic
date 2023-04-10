@@ -92,7 +92,7 @@
                 },
                 success: function (data) {
                     if (data.status == 200) {
-                        $('#main-dataTable').DataTable().ajax.reload();
+                        $('#main-datatable').DataTable().ajax.reload(null, false);
                         // show custom message or use the default
                         toastr.success((data.message) ?? 'Data Added Successfully');
                     } else

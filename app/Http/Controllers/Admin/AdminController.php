@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use Yajra\DataTables\DataTables;
 
 
@@ -55,7 +56,10 @@ class AdminController extends Controller
         ]);
 
         if($request->has('image')){
-            //
+            $image = Image::make($request->image);
+            $path = 'assets/uploads/admins/fosdo.webp';
+            $image->save($path,90,'webp');
+            $data['image'] = $path;
         }
 
 
