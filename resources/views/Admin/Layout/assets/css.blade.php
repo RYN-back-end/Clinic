@@ -22,6 +22,9 @@
 <!-- Dropify Css -->
 <link href="{{asset('assets/main')}}/dropify/dropify.min.css" rel="stylesheet" type="text/css" />
 
+<!-- Sweet Alert-->
+<link href="{{asset('assets/admin')}}/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
 <!-- Toastr Css -->
 <link href="{{asset('assets/main')}}/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
 

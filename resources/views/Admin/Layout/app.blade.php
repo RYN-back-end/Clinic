@@ -10,6 +10,9 @@
 
 <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
+<div id="loader-overlay">
+    <div class="loader"></div>
+</div>
 
 <!-- Begin page -->
 <div id="layout-wrapper">

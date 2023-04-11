@@ -1,4 +1,4 @@
-@extends('Admin.Layout.master')
+@extends('Admin.Layout.app')
 @section('title')
     Home
 @endsection

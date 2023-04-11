@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Traits\UploadFiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
@@ -12,6 +13,7 @@ use Yajra\DataTables\DataTables;
 
 class AdminController extends Controller
 {
+    use UploadFiles;
     public function index(request $request)
     {
         if ($request->ajax()) {
@@ -35,32 +37,27 @@ class AdminController extends Controller
                 ->escapeColumns([])
                 ->make(true);
         }
-        return view('Admin.Admin.index');
+        return view('Admin.CRUD.Admin.index');
     }
 
 
     public function create()
     {
-        return view('Admin.Admin.parts.create');
-
+        return view('Admin.CRUD.Admin.parts.create');
     }
 
 
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
-            'name'   => 'required',
-            'email' => 'required|unique:admins',
+            'image'    => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
+            'name'     => 'required',
+            'email'    => 'required|unique:admins',
             'password' => 'required|min:6',
         ]);
 
-        if($request->has('image')){
-            $image = Image::make($request->image);
-            $path = 'assets/uploads/admins/fosdo.webp';
-            $image->save($path,90,'webp');
-            $data['image'] = $path;
-        }
+        if($request->has('image'))
+            $data['image'] = $this->saveFile($request->image,'assets/uploads/admins','yes',70);
 
 
         $data['password'] = Hash::make($request->password);
@@ -82,7 +79,8 @@ class AdminController extends Controller
 
     public function edit($id)
     {
-        //
+        $row = Admin::findOrFail($id);
+        return view('Admin.CRUD.Admin.parts.edit',compact('row'));
     }
 
 
@@ -94,6 +92,21 @@ class AdminController extends Controller
 
     public function destroy($id)
     {
-        //
+        $row = Admin::findOrFail($id);
+
+        if(loggedAdmin('id') == $row->id)
+            return response()->json(['status'  => 405,]);
+
+        else{
+            if (file_exists($row->image)) {
+                unlink($row->image);
+            }
+            $row->delete();
+            return response()->json(
+                [
+                    'status'  => 200,
+                    'message' => "Admin Deleted Successfully"
+                ]);
+        }
     }
 }

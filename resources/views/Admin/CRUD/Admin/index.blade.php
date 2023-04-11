@@ -1,4 +1,4 @@
-@extends('Admin.Layout.master')
+@extends('Admin.Layout.app')
 @section('title')
     Admins
 @endsection
@@ -64,7 +64,6 @@
     </div>
 
 
-    @include('Admin.Layout.inc.yajraHelper')
 @endsection
 @section('dashboard-js')
     <script>
@@ -77,15 +76,8 @@
             {data: 'created_at', name: 'created_at'},
             {data: 'actions', name: 'actions'},
         ];
-        // Show Data
-        showData('{{ route('admins.index') }}', columns)
-
-        // Show Add Modal
-        showAddModal('{{ route('admins.create') }}');
-
-        // create new data
-        addScript();
     </script>
+    @include('Admin.Layout.inc.yajraHelper',['url'=>'admins']);
 
 @endsection
 

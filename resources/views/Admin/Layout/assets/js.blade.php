@@ -47,9 +47,26 @@
 <!-- Toastr Js -->
 <script src="{{asset('assets/main')}}/toastr/toastr.min.js"></script>
 
+<!-- Sweet Alerts js -->
+<script src="{{asset('assets/admin')}}/libs/sweetalert2/sweetalert2.min.js"></script>
+
+<!-- Sweet alert init js-->
+<script src="{{asset('assets/admin')}}/js/pages/sweet-alerts.init.js"></script>
+
 <!-- App js -->
 <script src="{{asset('assets/admin')}}/js/app.js"></script>
 
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(window).on('load', function() {
+        $('#loader-overlay').fadeOut('slow');
+    });
+</script>
 
 
 @yield('dashboard-js')
