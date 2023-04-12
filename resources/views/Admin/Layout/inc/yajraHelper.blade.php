@@ -63,8 +63,9 @@
                         text: 'show',
                         className: 'btn-primary'
                     },
-                ]
+                ],
             });
+
 
 
         // Show Add Modal
@@ -123,67 +124,6 @@
             });
 
 
-        // Show Delete SweetAlert & Delete Using Ajax
-            $(document).on('click', '.delete', function () {
-                var id = $(this).data('id');
-                swal.fire({
-                    title: "Delete Data",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#dc5339",
-                    confirmButtonText: "Yes, Delete it!",
-                    cancelButtonText: "Cancel",
-                    okButtonText: "Submit",
-                    closeOnConfirm: false
-                }).then((result) => {
-                    if (!result.isConfirmed) {
-                        return true;
-                    }
-                    var url = '{{ route("$url.destroy",":id") }}';
-                    url = url.replace(':id', id)
-                    $.ajax({
-                        url: url,
-                        type: 'DELETE',
-                        beforeSend: function () {
-                            $('#loader-overlay').show()
-                        },
-                        success: function (data) {
-
-                            window.setTimeout(function () {
-                                $('#loader-overlay').hide()
-                                if (data.status == 200) {
-                                    toastr.success((data.message) ?? 'Data Deleted Successfully')
-                                    $('#main-datatable').DataTable().ajax.reload(null, false);
-                                } else if (data.status == 405) {
-                                    toastr.warning("Can't Delete Your Account !")
-                                } else {
-                                    toastr.error('Oops .. There is an error');
-                                }
-
-                            }, 300);
-                        }, error: function (data) {
-
-                            if (data.status === 500) {
-                                toastr.error('Oops .. There is an error');
-                            }
-                            if (data.status === 422) {
-                                var errors = $.parseJSON(data.responseText);
-                                $.each(errors, function (key, value) {
-                                    if ($.isPlainObject(value)) {
-                                        $.each(value, function (key, value) {
-                                            toastr.error(value)
-                                        });
-                                    }
-                                });
-                            }
-                        }
-
-                    });
-                });
-            });
-
-
         // Show Edit Modal
         $(document).on('click', '.editBtn', function () {
             var id = $(this).data('id');
@@ -196,6 +136,114 @@
                 $('#modal-body').load(editUrl)
             }, 500)
         });
+
+        // Update Script using Ajax
+        $(document).on('submit', 'Form#updateForm', function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            var url = $('#updateForm').attr('action');
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                beforeSend: function () {
+                    $('#updateButton').html('<span style="margin-right: 4px;">Loading</span><i class="bx bx-loader bx-spin"></i>');
+                },
+                success: function (data) {
+                    $('#updateButton').html(`Update`).attr('disabled', false);
+                    if (data.status == 200) {
+                        $('#main-datatable').DataTable().ajax.reload();
+                        toastr.success((data.message) ?? 'Data Updated Successfully');
+                    } else
+                        toastr.error('Oops .. There is an error');
+
+                    $('#editOrCreate').modal('hide')
+                },
+                error: function (data) {
+                    if (data.status === 500) {
+                        toastr.error('Oops .. There is an error');
+                    } else if (data.status === 422) {
+                        var errors = $.parseJSON(data.responseText);
+                        $.each(errors, function (key, value) {
+                            if ($.isPlainObject(value)) {
+                                $.each(value, function (key, value) {
+                                    toastr.error(value, 'Error');
+                                });
+                            }
+                        });
+                    } else
+                        toastr.error('Oops .. There is an error');
+                    $('#updateButton').html(`Update`).attr('disabled', false);
+                },//end error method
+
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+
+
+        // Show Delete SweetAlert & Delete Using Ajax
+        $(document).on('click', '.delete', function () {
+            var id = $(this).data('id');
+            swal.fire({
+                title: "Delete Data",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#dc5339",
+                confirmButtonText: "Yes, Delete it!",
+                cancelButtonText: "Cancel",
+                okButtonText: "Submit",
+                closeOnConfirm: false
+            }).then((result) => {
+                if (!result.isConfirmed) {
+                    return true;
+                }
+                var url = '{{ route("$url.destroy",":id") }}';
+                url = url.replace(':id', id)
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    beforeSend: function () {
+                        $('#loader-overlay').show()
+                    },
+                    success: function (data) {
+
+                        window.setTimeout(function () {
+                            $('#loader-overlay').hide()
+                            if (data.status == 200) {
+                                toastr.success((data.message) ?? 'Data Deleted Successfully')
+                                $('#main-datatable').DataTable().ajax.reload(null, false);
+                            } else if (data.status == 405) {
+                                toastr.warning("Can't Delete Your Account !")
+                            } else {
+                                toastr.error('Oops .. There is an error');
+                            }
+
+                        }, 300);
+                    }, error: function (data) {
+
+                        if (data.status === 500) {
+                            toastr.error('Oops .. There is an error');
+                        }
+                        if (data.status === 422) {
+                            var errors = $.parseJSON(data.responseText);
+                            $.each(errors, function (key, value) {
+                                if ($.isPlainObject(value)) {
+                                    $.each(value, function (key, value) {
+                                        toastr.error(value)
+                                    });
+                                }
+                            });
+                        }
+                    }
+
+                });
+            });
+        });
+
+
 
     });
 

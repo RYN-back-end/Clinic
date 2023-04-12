@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
 use App\Traits\UploadFiles;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class AdminController extends Controller
     public function index(request $request)
     {
         if ($request->ajax()) {
-            $data = Admin::latest();
+            $data = Admin::query();
             return DataTables::of($data)
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
@@ -47,22 +48,17 @@ class AdminController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(AdminRequest $request)
     {
-        $data = $request->validate([
-            'image'    => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
-            'name'     => 'required',
-            'email'    => 'required|unique:admins',
-            'password' => 'required|min:6',
-        ]);
+        $validatedData = $request->validated();
 
         if($request->has('image'))
-            $data['image'] = $this->saveFile($request->image,'assets/uploads/admins','yes',70);
+            $validatedData['image'] = $this->saveFile($request->image,'assets/uploads/admins','yes',70);
 
 
-        $data['password'] = Hash::make($request->password);
+        $validatedData['password'] = Hash::make($request->password);
 
-        Admin::create($data);
+        Admin::create($validatedData);
         return response()->json(
             [
                 'status'  => 200,
@@ -84,9 +80,34 @@ class AdminController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(AdminRequest $request, $id)
     {
-        //
+        $validatedData = $request->validated();
+
+        $row = Admin::findOrFail($id);
+
+        /// adjust data before save it ////
+        if ($request->hasFile('image')){
+            // delete old image
+            if (file_exists($row->image)) {
+                unlink($row->image);
+            }
+            $validatedData['image'] = $this->saveFile($request->image,'assets/uploads/admins','yes',70);
+        }
+
+        if ($request->has('password') && $request->password !='')
+            $validatedData['password'] = Hash::make($request->password);
+        else
+            unset($validatedData['password']);
+
+        ////////////////////////////////////
+        $row->update($validatedData);
+
+        return response()->json(
+            [
+                'status'  => 200,
+                'message' => "Admin Updated Successfully"
+            ]);
     }
 
 

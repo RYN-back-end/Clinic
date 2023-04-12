@@ -73,7 +73,7 @@
             {data: 'image', name: 'image'},
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
-            {data: 'created_at', name: 'created_at'},
+            {data: 'created_at', name: 'created_at' },
             {data: 'actions', name: 'actions'},
         ];
     </script>
