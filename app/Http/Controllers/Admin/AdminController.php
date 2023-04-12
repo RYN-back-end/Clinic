@@ -101,6 +101,7 @@ class AdminController extends Controller
             unset($validatedData['password']);
 
         ////////////////////////////////////
+
         $row->update($validatedData);
 
         return response()->json(
