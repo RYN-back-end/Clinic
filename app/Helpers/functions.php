@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 
-function getFile($image)
+function getFile($image = null)
 {
     if ($image != null) {
         if (!file_exists($image)) {

@@ -24,6 +24,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{route('services.index')}}" class="waves-effect">
+                        <i class="bx bxs-offer"></i>
+                        <span key="t-Service">Services</span>
+                    </a>
+                </li>
+
 
 
             </ul>

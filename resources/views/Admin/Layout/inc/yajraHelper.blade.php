@@ -211,7 +211,6 @@
                     success: function (data) {
 
                         window.setTimeout(function () {
-                            $('#loader-overlay').hide()
                             if (data.status == 200) {
                                 toastr.success((data.message) ?? 'Data Deleted Successfully')
                                 $('#main-datatable').DataTable().ajax.reload(null, false);
@@ -220,7 +219,7 @@
                             } else {
                                 toastr.error('Oops .. There is an error');
                             }
-
+                            $('#loader-overlay').fadeOut()
                         }, 300);
                     }, error: function (data) {
 

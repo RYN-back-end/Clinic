@@ -21,7 +21,12 @@ class AdminController extends Controller
             $data = Admin::query();
             return DataTables::of($data)
                 ->editColumn('created_at', function ($row) {
-                    return $row->created_at->diffForHumans();
+                    try{
+                        return $row->created_at->diffForHumans();
+                    }
+                    catch (\Exception $e){
+                        return $e->getMessage();
+                    }
                 })
                 ->editColumn('image', function ($row) {
                     return ' <img src="' . getUserImage($row->image) . '" class="avatar-xs rounded-circle" onclick="window.open(this.src)">';

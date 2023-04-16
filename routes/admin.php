@@ -1,6 +1,8 @@
 <?php
+
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -10,24 +12,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['prefix'=>'admin'],function (){
+Route::group(['prefix' => 'admin'], function () {
     #### Auth ####
-    Route::get('login', [AuthController::class,'index'])->name('admin.loginPage');
-    Route::post('login', [AuthController::class,'doLogin'])->name('admin.doLogin');
+    Route::get('login', [AuthController::class, 'index'])->name('admin.loginPage');
+    Route::post('login', [AuthController::class, 'doLogin'])->name('admin.doLogin');
 });
 
-Route::group(['prefix'=>'admin','middleware'=>'auth:admin'],function (){
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     #### Auth ####
     Route::get('logout', 'AuthController@logout')->name('admin.logout');
 
-    Route::namespace('Admin')->group(function () {
 
-        #### Home ####
-        Route::view('/', 'Admin/index')->name('adminHome');
+    #### Home ####
+    Route::view('/', 'Admin/index')->name('adminHome');
 
-        #### Admins ####
-        Route::resource('admins', AdminController::class);
+    #### Admins ####
+    Route::resource('admins', AdminController::class);
 
-    });
+    #### Services ####
+    Route::resource('services', ServiceController::class);
+
 });
 
