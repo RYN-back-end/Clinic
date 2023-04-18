@@ -49,7 +49,7 @@ class ServiceController extends Controller
     {
         $validatedData = $request->validated();
         if ($request->has('image'))
-            $validatedData['image'] = $this->saveFile($request->image, 'assets/uploads/services','no');
+            $validatedData['image'] = $this->saveFile($request->image, 'assets/uploads/services','yes',90);
         Service::create($validatedData);
         return $this->addResponse();
     }

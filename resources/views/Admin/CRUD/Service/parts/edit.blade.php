@@ -11,7 +11,7 @@
         <input type="hidden" value="{{$row->id}}" name="id">
         <div class="mb-3">
             <label class="form-label">Service Title</label>
-            <input type="text" name="title" class="form-control" placeholder="Enter title of the sevices" value="{{$row->title}}">
+            <input type="text" name="title" class="form-control" placeholder="Enter title of the Service" value="{{$row->title}}">
         </div>
 
         <div class="mb-3">

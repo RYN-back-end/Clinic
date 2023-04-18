@@ -62,11 +62,101 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    var loader = ` <div class="linear-background">
+                            <div class="inter-crop"></div>
+                            <div class="inter-right--top"></div>
+                            <div class="inter-right--bottom"></div>
+                        </div>
+        `;
+
+    // Show Add Modal
+    $(document).on('click', '.create-model', function (e) {
+        e.preventDefault();
+        var text = $(this).text();
+        var url = $(this).attr('href');
+        $('#modal-body').html(loader)
+        $('#operationText').text(text);
+        $('#mainModal').modal('show')
+        setTimeout(function () {
+            $('#modal-body').load(url)
+        }, 500)
+    });
+
+    // add for all
+    $(document).on('submit', "#modal-body > form", function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+
+        var url = $('#modal-body >form').attr('action');
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            beforeSend: function () {
+                $('#addButton').html('<span style="margin-right: 4px;">Loading</span><i class="bx bx-loader bx-spin"></i>');
+                // $('#modal-body').append(loader)
+                // $('#modal-body > form').hide()
+            },
+            complete: function () {
+            },
+            success: function (data) {
+
+                window.setTimeout(function () {
+                    $('#addButton').html(`Submit`).attr('disabled', false);
+                    if (data.status == 200) {
+                        $('#mainModal').modal('hide')
+                        $('#modal-body > form').remove()
+                        if (data.image){
+                            $('#admin-image').attr('src',data.image)
+                        }
+                        $('#main-datatable').DataTable().ajax.reload(null, false);
+                        // show custom message or use the default
+                        toastr.success((data.message) ?? 'Data Added Successfully');
+                    } else {
+                        $('#modal-body > .linear-background').hide(loader)
+                        $('#modal-body > form').show()
+                        toastr.error(data.message)
+                    }
+                }, 500);
+
+
+            },
+            error: function (data) {
+                $('#modal-body > .linear-background').hide(loader)
+                $('#addButton').html(`Submit`).attr('disabled', false);
+                $('#modal-body > form').show()
+                if (data.status === 500) {
+                    toastr.error('{{trans('admin.error')}}')
+                }
+
+                if (data.status === 422) {
+                    var errors = $.parseJSON(data.responseText);
+
+                    $.each(errors, function (key, value) {
+                        if ($.isPlainObject(value)) {
+                            $.each(value, function (key, value) {
+                                toastr.error(value)
+                            });
+
+                        }
+                    });
+                }
+                if (data.status == 421) {
+                    toastr.error(data.message)
+                }
+
+            },//end error method
+
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+
 
     $(window).on('load', function() {
         $('#loader-overlay').fadeOut('slow');
     });
 </script>
-
 
 @yield('dashboard-js')

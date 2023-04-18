@@ -1636,13 +1636,13 @@ img {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .about__section .content__block ul.tab-btns li.tab-btn {
     margin-right: 15px;
     color: var(--theme_dark);
-    margin-bottom: 20px;
+    margin-bottom: 7px;
     text-transform: capitalize;
     font-weight: 700;
     cursor: pointer;
@@ -2702,6 +2702,8 @@ img {
 
 .about__section.style-two .image-1 img {
     position: relative;
+    height: 542px;
+    width: 439px;
 }
 
 .about__section.style-two .image-1 {

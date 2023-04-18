@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\QualificationController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SiteTextAndImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     #### Services ####
     Route::resource('services', ServiceController::class);
+
+    #### Qualifications ####
+    Route::resource('Qualifications', QualificationController::class);
+
+    #### editQualificationSection ####
+    Route::POST('editQualificationSection', [SiteTextAndImageController::class,'update'])->name('editQualificationSection');
 
 });
 

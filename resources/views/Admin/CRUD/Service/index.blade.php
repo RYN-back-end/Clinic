@@ -34,8 +34,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Photo</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>Title</th>
+                            <th>Description</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
