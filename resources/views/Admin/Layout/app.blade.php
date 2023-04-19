@@ -10,8 +10,8 @@
 
 <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
-<div id="loader-overlay">
-    <div class="loader"></div>
+<div class="loader">
+    <div class="loader__icon"></div>
 </div>
 
 <!-- Begin page -->
@@ -40,7 +40,7 @@
                                 <h5 class="modal-title"><span id="operationText"></span></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body" id="modal-body">
+                            <div class="modal-body" id="modalBody">
 
                             </div>
                         </div>

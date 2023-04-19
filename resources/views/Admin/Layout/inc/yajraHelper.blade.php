@@ -220,7 +220,7 @@
                                 toastr.error('Oops .. There is an error');
                             }
                             $('#loader-overlay').fadeOut()
-                        }, 300);
+                        }, 500);
                     }, error: function (data) {
 
                         if (data.status === 500) {

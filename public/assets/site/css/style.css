@@ -332,6 +332,17 @@ img {
 	padding: 0px;
 	display: block !important;
 }
+
+.image-profile-nav{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    border: 1px solid #00B3D7;
+    object-fit: cover;
+    object-position: top;
+    background-color: #fff;
+}
+
 .main-menu .navigation {
 	position: relative;
 	margin: 0px;
@@ -342,7 +353,7 @@ img {
 }
 .main-menu .navigation>li {
 	position: relative;
-	padding: 32px 0px;
+	padding: 25px 0px;
 	margin-right: 20px;
 	-webkit-transition: all 300ms ease;
 	-o-transition: all 300ms ease;
@@ -603,11 +614,18 @@ img {
 	display: none;
 }
 .header-upper .navbar-right-info {
-	position: relative;
-	margin-left: 40px;
+    position: relative;
+    /*border-bottom: 1px solid aquamarine;*/
+	margin-left: 50px;
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
+}
+.user-prof-section {
+    margin-left: 50px;
+}
+.name-profile-nav{
+    color: #fff;
 }
 
 /***
@@ -2075,7 +2093,7 @@ img {
 .contact-form input,
 .contact-form textarea {
     position: relative;
-    height: 70px;
+    height: 55px;
     width: 100%;
     border: 2px solid rgb(8 76 148 / 20%);
     padding: 0 28px;
@@ -2086,7 +2104,7 @@ img {
 
 .contact-form i {
     position: absolute;
-    top: 22px;
+    top: 17px;
     right: 45px;
     color: var(--theme_primary);
     font-size: 22px;
@@ -2099,15 +2117,15 @@ img {
 
 .contact-form textarea {
     position: relative;
-    height: 220px;
-    padding: 22px 28px;
+    height: 140px;
+    padding: 9px 28px;
 }
 
 /* contact form section */
 
 .contact-form-section {
     position: relative;
-    padding: 120px 0;
+    padding: 30px 0;
     background: var(--theme_dark);
 }
 

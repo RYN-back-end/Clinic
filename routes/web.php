@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Site\AuthController;
 use App\Http\Controllers\Site\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,11 +20,16 @@ use Illuminate\Support\Facades\Route;
 
         #### Home ####
         Route::get('/', [HomeController::class,'index'])->name('/');
+
         #### Contact ###
         Route::get('contact', [HomeController::class,'contactPage'])->name('contactPage');
         Route::POST('postContactUs', [HomeController::class,'postContactUs'])->name('postContactUs');
+
         #### About ###
         Route::get('about', [HomeController::class,'aboutPage'])->name('aboutPage');
+
+        #### Auth ###
+        Route::get('sign-up', [AuthController::class,'signUp'])->name('signUpPage');
 
     });
 

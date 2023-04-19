@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\QualificationController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SiteTextAndImageController;
@@ -39,6 +40,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     #### editQualificationSection ####
     Route::POST('editQualificationSection', [SiteTextAndImageController::class,'update'])->name('editQualificationSection');
+
+    #### Contacts ####
+    Route::resource('contacts', ContactUsController::class);
 
 });
 

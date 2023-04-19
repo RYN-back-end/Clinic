@@ -131,45 +131,34 @@
             <div class="wrapper-box">
                 <div class="outer-box">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 feature-block">
+                        <div class="col-lg-4 col-md-6 feature-block">
                             <div class="inner-box wow animated fadeInUp" data-wow-delay="0.1s"
                                  data-wow-duration="1500ms">
                                 <div class="icon"><img src="{{asset('assets/site')}}/images/icons/icon-1.png" alt=""></div>
-                                <h4><a href="">Psychiatry</a></h4>
-                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing</div>
+                                <h4><a href="">Sign Up</a></h4>
+                                <div class="text">Signing up is quick and easy, simply click on the lower button</div>
                                 <div class="link-btn">
                                     <a href="hospital-details.html" class="link"><i class="docpoint-icon-4"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 feature-block">
-                            <div class="inner-box wow animated fadeInUp" data-wow-delay="0.2s"
-                                 data-wow-duration="1500ms">
-                                <div class="icon"><img src="{{asset('assets/site')}}/images/icons/icon-2.png" alt=""></div>
-                                <h4><a href="">Gynecology</a></h4>
-                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing</div>
-                                <div class="link-btn">
-                                    <a href="hospital-details.html" class="link"><i class="docpoint-icon-4"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 feature-block">
+                        <div class="col-lg-4 col-md-6 feature-block">
                             <div class="inner-box wow animated fadeInUp" data-wow-delay="0.3s"
                                  data-wow-duration="1500ms">
-                                <div class="icon"><img src="{{asset('assets/site')}}/images/icons/icon-3.png" alt=""></div>
-                                <h4><a href="">Pulmonology</a></h4>
-                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing</div>
+                                <div class="icon"><img src="{{asset('assets/site')}}/images/icons/icon-2.png" alt=""></div>
+                                <h4><a href="">Make Reservation</a></h4>
+                                <div class="text">Browse our available times and Choose your suitable one</div>
                                 <div class="link-btn">
                                     <a href="hospital-details.html" class="link"><i class="docpoint-icon-4"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 feature-block">
-                            <div class="inner-box wow animated fadeInUp" data-wow-delay="0.4s"
+                        <div class="col-lg-4 col-md-6 feature-block">
+                            <div class="inner-box wow animated fadeInUp" data-wow-delay="0.5s"
                                  data-wow-duration="1500ms">
                                 <div class="icon"><img src="{{asset('assets/site')}}/images/icons/icon-4.png" alt=""></div>
-                                <h4><a href="">Orthopedics</a></h4>
-                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing</div>
+                                <h4><a href="">Feedback</a></h4>
+                                <div class="text">After making reservation, we will answer you as soon as possible</div>
                                 <div class="link-btn">
                                     <a href="hospital-details.html" class="link"><i class="docpoint-icon-4"></i></a>
                                 </div>
@@ -184,14 +173,14 @@
 
     <!-- Contact form section -->
     <section class="contact-form-section">
-        <div class="bg-image" style="background-image: url(assets/site/images/background/bg-2.jpg);"></div>
+        <div class="bg-image" style="background-image: url(assets/site/images/background/bg-22.jpg);"></div>
         <div class="shape" style="background-image: url(assets/site/images/shape/shape-12.png);"></div>
         <div class="auto-container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-6">
                     <div class="contact-form">
                         <div class="sec-title mb-30">
-                            <h2>Contact with us 👋</h2>
+                            <h3>Contact with us 👋</h3>
                             <div class="text">We will be happy to answer your questions.</div>
                         </div>
                         <form action="{{route('postContactUs')}}" method="POST" id="contactForm">
@@ -210,7 +199,7 @@
                                     <i class="docpoint-icon-1"></i>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <textarea placeholder="Your Message" name="message"></textarea>
+                                    <textarea placeholder="Your message ..." name="message"></textarea>
                                     <i class="docpoint-icon-13"></i>
                                 </div>
                                 <div class="form-group col-md-12">

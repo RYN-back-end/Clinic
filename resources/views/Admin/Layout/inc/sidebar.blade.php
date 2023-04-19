@@ -29,18 +29,35 @@
                 </li>
 
 
-
                 <li>
-                    <a href="{{route('services.index')}}" class="waves-effect">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bxs-offer"></i>
-                        <span key="t-Service">Services</span>
+                        <span key="t-dashboards">Services</span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('services.index')}}" key="t-admins">Services List</a></li>
+                        <li><a href="{{route('services.create')}}" class="create-model" key="t-default">add service</a></li>
+                    </ul>
                 </li>
+
+{{--                <li>--}}
+{{--                    <a href="{{route('services.index')}}" class="waves-effect">--}}
+{{--                        <i class="bx bxs-offer"></i>--}}
+{{--                        <span key="t-Service">Services</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
                 <li>
                     <a href="{{route('Qualifications.index')}}" class="waves-effect">
                         <i class="bx bxs-graduation"></i>
                         <span key="t-Qualifications">Qualifications</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('contacts.index')}}" class="waves-effect">
+                        <i class="bx bxs-conversation"></i>
+                        <span key="t-contact">Contact us</span>
                     </a>
                 </li>
 

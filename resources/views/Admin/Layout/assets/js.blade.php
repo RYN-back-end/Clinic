@@ -74,28 +74,28 @@
         e.preventDefault();
         var text = $(this).text();
         var url = $(this).attr('href');
-        $('#modal-body').html(loader)
+        $('#modalBody').html(loader)
         $('#operationText').text(text);
         $('#mainModal').modal('show')
         setTimeout(function () {
-            $('#modal-body').load(url)
+            $('#modalBody').load(url)
         }, 500)
     });
 
     // add for all
-    $(document).on('submit', "#modal-body > form", function (e) {
+    $(document).on('submit', "#modalBody > form", function (e) {
         e.preventDefault();
         var formData = new FormData(this);
 
-        var url = $('#modal-body >form').attr('action');
+        var url = $('#modalBody >form').attr('action');
         $.ajax({
             url: url,
             type: 'POST',
             data: formData,
             beforeSend: function () {
                 $('#addButton').html('<span style="margin-right: 4px;">Loading</span><i class="bx bx-loader bx-spin"></i>');
-                // $('#modal-body').append(loader)
-                // $('#modal-body > form').hide()
+                // $('#modalBody').append(loader)
+                // $('#modalBody > form').hide()
             },
             complete: function () {
             },
@@ -105,7 +105,7 @@
                     $('#addButton').html(`Submit`).attr('disabled', false);
                     if (data.status == 200) {
                         $('#mainModal').modal('hide')
-                        $('#modal-body > form').remove()
+                        $('#modalBody > form').remove()
                         if (data.image){
                             $('#admin-image').attr('src',data.image)
                         }
@@ -113,8 +113,8 @@
                         // show custom message or use the default
                         toastr.success((data.message) ?? 'Data Added Successfully');
                     } else {
-                        $('#modal-body > .linear-background').hide(loader)
-                        $('#modal-body > form').show()
+                        $('#modalBody > .linear-background').hide(loader)
+                        $('#modalBody > form').show()
                         toastr.error(data.message)
                     }
                 }, 500);
@@ -122,9 +122,9 @@
 
             },
             error: function (data) {
-                $('#modal-body > .linear-background').hide(loader)
+                $('#modalBody > .linear-background').hide(loader)
                 $('#addButton').html(`Submit`).attr('disabled', false);
-                $('#modal-body > form').show()
+                $('#modalBody > form').show()
                 if (data.status === 500) {
                     toastr.error('{{trans('admin.error')}}')
                 }
@@ -155,7 +155,7 @@
 
 
     $(window).on('load', function() {
-        $('#loader-overlay').fadeOut('slow');
+        $('.loader').fadeOut('slow');
     });
 </script>
 
