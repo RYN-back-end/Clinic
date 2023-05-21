@@ -31,6 +31,14 @@
                         <form>
                             <h4 class="group-title">Your Information:</h4>
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                            <label class="form-label">Photo</label>
+                                            <input type="file" class="dropify" name="image" data-default-file="{{getUserImage()}}"
+                                                   accept="image/png, image/gif, image/jpeg,image/jpg, image/webp"/>
+                                            <span class="form-text text-info">Accept Only : png, gif, jpeg, jpg, webp</span>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="text" placeholder="Patient name">

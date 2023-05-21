@@ -15,8 +15,13 @@
 <script src="{{asset('assets/main')}}/toastr/toastr.min.js"></script>
 <script src="{{asset('assets/site')}}/js/script.js"></script>
 
+<!-- Dropify Js -->
+<script src="{{asset('assets/main')}}/dropify/dropify.min.js"></script>
 
 <script type="text/javascript">
+
+    $('.dropify').dropify("Upload Here");
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

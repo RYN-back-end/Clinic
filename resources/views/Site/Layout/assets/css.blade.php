@@ -25,4 +25,8 @@
 <!--[if lt IE 9]>
 <script src="js/respond.js"></script><![endif]-->
 
+<!-- Dropify Css -->
+<link href="{{asset('assets/main')}}/dropify/dropify.min.css" rel="stylesheet" type="text/css" />
+
+
 @yield('site-css')

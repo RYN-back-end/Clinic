@@ -23,6 +23,7 @@
                                     <li><a href="{{route('/')}}">Home</a></li>
                                     <li><a href="{{route('aboutPage')}}">About</a></li>
                                     <li><a href="{{route('contactPage')}}">Contact</a></li>
+                                    <li><a href="{{route('signUpPage')}}">My Account</a></li>
                                     <li class="user-prof-section"><a href="#">
                                             <img class="image-profile-nav" src="{{getUserImage()}}" alt="">
                                             <span class="name-profile-nav">Ahmed Yahya</span>

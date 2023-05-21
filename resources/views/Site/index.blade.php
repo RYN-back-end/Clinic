@@ -73,6 +73,7 @@
     </section>
     @endif
 
+    @if($siteInfo)
     <!-- about section style two -->
     <section class="about__section style-two">
         <div class="auto-container">
@@ -124,7 +125,7 @@
             </div>
         </div>
     </section>
-
+    @endif
     <!-- Features section style two -->
     <section class="features-section style-two">
         <div class="auto-container">
