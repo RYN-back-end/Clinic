@@ -147,11 +147,11 @@
                 },
                 error: function (data) {
                     if (data.status == 500) {
-                        $('#sendBtn').html("send").attr('disabled', false);
+                        $('#sendBtn').html(" Sign Up <i class='fas fa-long-arrow-alt-right'></i>").attr('disabled', false);
                         toastr.error('Oops There is an error');
                     }
                     else if (data.status == 422) {
-                        $('#sendBtn').html("send").attr('disabled', false);
+                        $('#sendBtn').html(" Sign Up <i class='fas fa-long-arrow-alt-right'></i>").attr('disabled', false);
                         var errors = $.parseJSON(data.responseText);
                         $.each(errors, function (key, value) {
                             if ($.isPlainObject(value)) {
