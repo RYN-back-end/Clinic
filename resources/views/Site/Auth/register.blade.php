@@ -28,7 +28,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="wrapper-box">
-                        <form>
+                        <form id="registerForm" enctype="multipart/form-data" action="{{route('register')}}">
+                            @csrf
                             <h4 class="group-title">Your Information:</h4>
                             <div class="row">
                                 <div class="col-md-12">
@@ -41,31 +42,31 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Patient name">
+                                        <input type="text" placeholder="Patient name" name="name">
                                         <i class="fas fa-user-edit"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Patient phone">
+                                        <input type="text" placeholder="Patient phone" name="phone">
                                         <i class="fas fa-phone"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Patient email">
+                                        <input type="text" placeholder="Patient email" name="email">
                                         <i class="fas fa-at"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="password" placeholder="Enter password" id="password">
+                                        <input type="password" placeholder="Enter password" id="password" name="password">
                                         <i class="fas fa-eye-slash" id="eyeIcon"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="number" min="0" max="150" placeholder="Patient age">
+                                        <input type="number" min="0" max="150" placeholder="Patient age" name="age">
                                         <i class="fas fa-calendar"></i>
                                     </div>
                                 </div>
@@ -75,13 +76,13 @@
                                         <ul class="select-box">
                                             <li>
                                                 <div class="single-checkbox">
-                                                    <input type="radio" name="check-box" id="check3">
+                                                    <input type="radio" name="check-box" id="check3" value="m">
                                                     <label for="check3"><span></span>Male</label>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="single-checkbox">
-                                                    <input type="radio" name="check-box" id="check4">
+                                                    <input type="radio" name="check-box" id="check4" value="f">
                                                     <label for="check4"><span></span>Female</label>
                                                 </div>
                                             </li>
@@ -90,7 +91,7 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="link-btn">
-                                        <button type="submit" class="theme-btn" style="width: 200">
+                                        <button type="submit" id="sendBtn" class="theme-btn" style="width: 200">
                                             Sign Up
                                             <i class="fas fa-long-arrow-alt-right"></i>
                                         </button>
@@ -123,6 +124,51 @@
                 $(this).removeClass('fas fa-eye').addClass('fas fa-eye-slash');
             }
         });
+
+        $("form#registerForm").submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            var url = $('#registerForm').attr('action');
+            $.ajax({
+                url:url,
+                type: 'POST',
+                data: formData,
+                beforeSend: function(){
+                    $('#sendBtn').html('<span style="margin-right: 4px;color: white"> wait </span><span class="spinner-border spinner-border-sm text-light" ' + ' ></span>');
+                },
+                success: function (data) {
+                    if (data.status == 200){
+                        toastr.success('We have received your message and we will reply you as soon as possible');
+                        $('#registerForm')[0].reset();
+                        $('#sendBtn').html("send").attr('disabled', false);
+                    }else {
+                        toastr.error('Oops There is an error');
+                    }
+                },
+                error: function (data) {
+                    if (data.status == 500) {
+                        $('#sendBtn').html("send").attr('disabled', false);
+                        toastr.error('Oops There is an error');
+                    }
+                    else if (data.status == 422) {
+                        $('#sendBtn').html("send").attr('disabled', false);
+                        var errors = $.parseJSON(data.responseText);
+                        $.each(errors, function (key, value) {
+                            if ($.isPlainObject(value)) {
+                                $.each(value, function (key, value) {
+                                    toastr.error(value);
+                                });
+                            }
+                        });
+                    }
+                },//end error method
+
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+
     </script>
 @endsection
 

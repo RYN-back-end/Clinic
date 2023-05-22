@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 
         #### Auth ###
         Route::get('sign-up', [AuthController::class,'signUp'])->name('signUpPage');
+        Route::post('register', [AuthController::class,'register'])->name('register');
 
     });
 
